@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <style>
+        body {
+            margin: 0;
+            /* background: #000;*/
+            font-family: sans-serif
+        }
+
+        :root {
+            --sw-primary: #C3DD2E;
+            --sw-dark: #0b0b0b;
+            --sw-glow: rgba(195, 221, 46, 0.6);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        .sw-form-container {
+            background: linear-gradient(180deg, #0b0b0b 0%, #111 100%);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .sw-form {
+            width: 100%;
+            max-width: 420px;
+            background: #111;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(195, 221, 46, 0.15);
+            backdrop-filter: blur(6px);
+        }
+
+        .sw-form h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .sw-field {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .sw-field input,
+        .sw-field textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #222;
+            background: #0b0b0b;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+            box-sizing: border-box;
+            /* 🔥 clave */
+        }
+
+        .sw-field input:focus,
+        .sw-field textarea:focus {
+            border-color: var(--sw-primary);
+            box-shadow: 0 0 10px var(--sw-glow);
+        }
+
+        .sw-field label {
+            position: absolute;
+            top: -8px;
+            left: 10px;
+            background: #111;
+            padding: 0 6px;
+            font-size: 0.75rem;
+            color: var(--sw-primary);
+        }
+
+        .sw-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: var(--sw-primary);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .sw-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 15px var(--sw-glow);
+        }
+
+        .sw-msg {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            text-align: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .sw-msg.show {
+            opacity: 1;
+        }
+
+        .sw-msg.success {
+            color: var(--sw-primary);
+        }
+
+        .sw-msg.error {
+            color: #ff4d4d;
+        }
+
+        /* mobile tweak */
+        @media (max-width: 480px) {
+            .sw-form {
+                padding: 20px;
+            }
+        }
+
+        .g-recaptcha {
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+
+    <div class="sw-form-container">
+        <form id="miFormulario" class="sw-form">
+            <h2>Contáctanos</h2>
+
+            <div class="sw-field">
+                <label>Nombre</label>
+                <input type="text" name="nombre" required>
+            </div>
+
+            <div class="sw-field">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="sw-field">
+                <label>Teléfono</label>
+                <input type="text" name="telefono" required>
+            </div>
+
+            <div class="sw-field">
+                <label>Mensaje</label>
+                <textarea name="mensaje" rows="3" required></textarea>
+            </div>
+            <div class="g-recaptcha" data-sitekey="6LdlEx4sAAAAAM9Em-YeK166SFoQHcRfcOAAjsxs"></div>
+
+            <button class="sw-btn" type="submit">Enviar</button>
+
+            <div id="formMsg" class="sw-msg"></div>
+        </form>
+    </div>
+
+    <script>
+        // Sanitizar: elimina tags HTML y javascript
+        function sanitize(str) {
+            return str
+                .replace(/</g, "")
+                .replace(/>/g, "")
+                .replace(/script/gi, "")
+                .replace(/javascript:/gi, "")
+                .trim();
+        }
+
+        // Validar formato de email
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        // Solo letras, numeros, espacios y puntuacion basica (sin emojis ni caracteres raros)
+        function isCleanText(str) {
+            return /^[a-zA-Z0-9\u00C0-\u00FF\s.,;:!?()\-_'"\n\r]+$/.test(str);
+        }
+
+        // Solo digitos para telefono
+        function isValidPhone(str) {
+            return /^[0-9]{7,15}$/.test(str);
+        }
+
+        document.getElementById("miFormulario").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const btn = this.querySelector("button");
+            const msg = document.getElementById("formMsg");
+
+            // Limpiar mensaje previo
+            msg.className = "sw-msg";
+            msg.innerText = "";
+
+            // Obtener y sanitizar valores
+            const nombre = sanitize(this.nombre.value);
+            const email = sanitize(this.email.value);
+            const telefono = sanitize(this.telefono.value);
+            const mensaje = sanitize(this.mensaje.value);
+
+            // --- Validaciones ---
+            if (nombre.length < 4) {
+                msg.className = "sw-msg show error";
+                msg.innerText = "El nombre debe tener al menos 4 caracteres";
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                msg.className = "sw-msg show error";
+                msg.innerText = "Ingresa un email v\u00e1lido";
+                return;
+            }
+
+            if (!isValidPhone(telefono)) {
+                msg.className = "sw-msg show error";
+                msg.innerText = "Tel\u00e9fono inv\u00e1lido (solo n\u00fameros, 7-15 d\u00edgitos)";
+                return;
+            }
+
+            if (mensaje.length < 1) {
+                msg.className = "sw-msg show error";
+                msg.innerText = "El mensaje es obligatorio";
+                return;
+            }
+
+            if (mensaje.length > 500) {
+                msg.className = "sw-msg show error";
+                msg.innerText = "El mensaje no debe exceder 500 caracteres";
+                return;
+            }
+
+            if (!isCleanText(mensaje)) {
+                msg.className = "sw-msg show error";
+                msg.innerText = "El mensaje contiene caracteres no permitidos";
+                return;
+            }
+
+            // Validar captcha
+            const captcha = grecaptcha.getResponse();
+            if (!captcha) {
+                msg.className = "sw-msg show error";
+                msg.innerText = "Confirma que no eres robot";
+                return;
+            }
+
+            // --- Todo OK, enviar ---
+            btn.innerText = "Enviando...";
+            btn.disabled = true;
+
+            const formData = new FormData();
+            formData.append("nombre", nombre);
+            formData.append("email", email);
+            formData.append("telefono", telefono);
+            formData.append("mensaje", mensaje);
+            formData.append("captcha", captcha);
+
+            fetch("https://script.google.com/macros/s/AKfycbzhG5g1oMKNUltMtmal3tZh4WlgxMOhgoDX2rkifKPoIqNhNnp3kdXAV6FNf_2KNfMWwQ/exec", {
+                method: "POST",
+                mode: "no-cors",
+                body: formData
+            })
+                .then(() => {
+                    msg.className = "sw-msg show success";
+                    msg.innerText = "Mensaje enviado correctamente";
+                    this.reset();
+                    grecaptcha.reset();
+                })
+                .catch(() => {
+                    msg.className = "sw-msg show error";
+                    msg.innerText = "Error al enviar";
+                })
+                .finally(() => {
+                    btn.innerText = "Enviar";
+                    btn.disabled = false;
+                });
+        });
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</body>
+
+</html>

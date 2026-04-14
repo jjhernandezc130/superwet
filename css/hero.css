@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --verde: #C3DD2E;
+    --amarillo: #F7DC32;
+    --rosa: #E23E7F;
+}
+
+body {
+    background: #000;
+    font-family: sans-serif;
+}
+
+.ancho {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.hero {
+    position: relative;
+    min-height: 110vh;
+    /*  ligeramente más alto que pantalla */
+    height: 110vh;
+    padding-top: 80px;
+    padding-bottom: 120px;
+    overflow: hidden;
+    background: linear-gradient(to bottom, var(--rosa), var(--amarillo), var(--verde));
+}
+
+.hero__bg {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.hero__bg--top {
+    top: 0;
+    height: calc(50% - 10px);
+    /*  deja 5px de espacio abajo */
+    background-image: url("https://superwet.com.mx/img/degradado.webp");
+    background-size: cover;
+    background-position: center bottom;
+    transform: rotate(180deg);
+}
+
+.hero__bg--bottom {
+    bottom: 0;
+    height: calc(50% - 10px);
+    /*  deja 5px de espacio arriba */
+    background-image: url("https://superwet.com.mx/img/degradado.webp");
+    background-size: cover;
+    background-position: center bottom;
+}
+
+.hero__header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.hero__logo {
+    width: clamp(420px, 30vw, 700px);
+    max-width: 90vw;
+    transform: translateY(600px) scale(0.9);
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+    opacity: 1;
+}
+
+.hero__product {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    z-index: 3;
+}
+
+.hero__product img {
+    width: clamp(420px, 35vw, 840px);
+
+    /*max-width: 90vw;*/
+    filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
+}
+
+
+
+@media (min-width: 800px) and (max-width: 1081px) {
+    .hero__product img {
+        width: clamp(420px, 33vw, 750px);
+    }
+
+    .hero__logo {
+        width: clamp(370px, 30vw, 500px);
+        max-width: 90vw;
+    }
+}
+
+/* 📱 MOBILE FIXES */
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 90px;
+        /*  más aire arriba en móvil */
+        padding-bottom: 100px;
+    }
+
+    .hero__logo {
+        width: 320px;
+        transform: translateY(215px) scale(0.9);
+    }
+
+    .hero__product {
+        bottom: 75px;
+    }
+
+    .hero__product img {
+        width: 420px;
+    }
+
+
+}
+
+@media (min-height: 1080px) {
+
+    .hero__product {
+        bottom: 100px;
+
+    }
+}
+
+/*  solo soporte temporal, no compite con el hero */
+.spacer {
+    height: 120vh;
+    background: #000;
+}

@@ -1,0 +1,284 @@
+/* BASE */
+.sw-encuentra-section {
+    position: relative;
+    overflow: hidden;
+    padding: 40px 20px;
+    /* reducimos altura del componente */
+    background: #000;
+    font-family: Arial, sans-serif;
+}
+
+.sw-encuentra-section * {
+    box-sizing: border-box;
+}
+
+.sw-encuentra__bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(ellipse at 65% 65%, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.95) 25%, #000 40%),
+        url('https://superwet.com.mx/img/fondo-pared.webp');
+    background-size: cover;
+    /*background-position: center;*/
+    z-index: 0;
+}
+
+.sw-encuentra__grid {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    /* menos espacio entre elementos en mobile */
+    align-items: center;
+}
+
+/* MOBILE (AJUSTADO Y LIMPIO) */
+.sw-encuentra__grid {
+    gap: 12px;
+}
+
+/* TEXTO ENCUENTRA */
+.sw-item-encuentra {
+    grid-row: 1;
+    justify-self: end;
+    width: auto;
+    max-width: 185px;
+    /* +5% adicional */
+    margin: 0;
+    margin-bottom: -85px;
+    /* bajar un poco más hacia mapa */
+}
+
+.sw-item-encuentra img {
+    width: 100%;
+    display: block;
+}
+
+/* MAPA */
+.sw-item-mapa {
+    grid-row: 2;
+    width: 100%;
+    max-width: 420px;
+    margin: -25px auto 0;
+    /* ligero ajuste */
+}
+
+/* VIDEO */
+.sw-item-video {
+    grid-row: 3;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+/* PROXIMAMENTE CENTRADO */
+.sw-item-proximamente {
+    grid-row: 4;
+    justify-self: center;
+    width: 96%;
+    /* crecer ~20% real */
+    max-width: 360px;
+    /* antes 300px */
+    margin-top: 10px;
+    text-align: center;
+}
+
+.sw-img-responsive {
+    width: 100%;
+    display: block;
+}
+
+/* DESKTOP */
+@media (min-width: 900px) {
+
+    .sw-encuentra-section {
+        padding: 70px 40px 20px;
+    }
+
+    .sw-encuentra__grid {
+        grid-template-columns: 1.2fr 0.8fr;
+        column-gap: 40px;
+        row-gap: 20px;
+    }
+
+    .sw-item-mapa {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        max-width: 800px;
+        justify-self: start;
+        margin-left: -20px;
+    }
+
+    .sw-item-encuentra {
+        grid-column: 2;
+        grid-row: 1;
+        max-width: 990px;
+        /* tamaño final */
+        justify-self: end;
+    }
+
+    /* crecimiento real de imagen en desktop */
+    .sw-item-encuentra img {
+        width: 120%;
+    }
+
+    /* posición final SIN romper animación */
+    .sw-item-encuentra.sw-visible {
+        transform: translate(0, 0) translateX(-160px) !important;
+    }
+
+    .sw-item-video {
+        grid-column: 2;
+        grid-row: 2;
+        max-width: 360px;
+        justify-self: start;
+    }
+
+    .sw-item-proximamente {
+        grid-column: 1;
+        grid-row: 3;
+        max-width: 520px;
+        justify-self: start;
+        margin-left: 2%;
+        margin-top: -40px;
+    }
+}
+
+/* Animaciones */
+.sw-anim-right {
+    opacity: 0;
+    transform: translateX(80px);
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sw-anim-left {
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sw-anim-fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sw-visible {
+    opacity: 1 !important;
+    transform: translate(0) !important;
+}
+
+/* Respiro */
+.sw-breathe {
+    animation: sw-breathe-anim 4s ease-in-out infinite alternate;
+}
+
+.sw-breathe-delay-1 {
+    animation-delay: .8s;
+}
+
+.sw-breathe-delay-2 {
+    animation-delay: 1.5s;
+}
+
+@keyframes sw-breathe-anim {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.035);
+    }
+}
+
+/* Video */
+.sw-video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 0;
+    /* esquinas cuadradas */
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Glow verde visible */
+.sw-video-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+
+    /* Borde no uniforme (más grueso en centros, delgado en esquinas) */
+    background:
+        linear-gradient(to right, transparent 0%, rgba(200, 255, 0, 0.9) 20%, rgba(200, 255, 0, 1) 50%, rgba(200, 255, 0, 0.9) 80%, transparent 100%) top/100% 3px no-repeat,
+        linear-gradient(to right, transparent 0%, rgba(200, 255, 0, 0.9) 20%, rgba(200, 255, 0, 1) 50%, rgba(200, 255, 0, 0.9) 80%, transparent 100%) bottom/100% 3px no-repeat,
+        linear-gradient(to bottom, transparent 0%, rgba(200, 255, 0, 0.9) 20%, rgba(200, 255, 0, 1) 50%, rgba(200, 255, 0, 0.9) 80%, transparent 100%) left/3px 100% no-repeat,
+        linear-gradient(to bottom, transparent 0%, rgba(200, 255, 0, 0.9) 20%, rgba(200, 255, 0, 1) 50%, rgba(200, 255, 0, 0.9) 80%, transparent 100%) right/3px 100% no-repeat;
+
+    filter: drop-shadow(0 0 6px rgba(200, 255, 0, 0.8)) drop-shadow(0 0 18px rgba(200, 255, 0, 0.6));
+}
+
+/* BOTON PLAY (circulo real) */
+.sw-video-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(200, 255, 0, 0.15);
+    border: 3px solid rgba(200, 255, 0, 0.95);
+    box-shadow:
+        0 0 20px rgba(200, 255, 0, 0.9),
+        0 0 40px rgba(200, 255, 0, 0.6);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* TRIANGULO */
+.sw-play-icon {
+    width: 0;
+    height: 0;
+    border-left: 32px solid rgba(200, 255, 0, 0.95);
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+}
+
+/* ocultar boton al reproducir */
+.sw-video-container.playing .sw-video-button {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sw-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sw-video__overlay {
+    position: absolute;
+    inset: 0;
+    /* EXACT match al contenedor */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+@media (max-width: 768px) {
+    .sw-item-encuentra {
+
+        max-width: 150px;
+
+    }
+}

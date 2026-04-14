@@ -1,0 +1,246 @@
+body {
+    margin: 0;
+    background: #000;
+    font-family: Arial, sans-serif;
+}
+
+.sw-crecemos {
+    position: relative;
+    /* background: radial-gradient(circle at center, #050805 0%, #000 90%);*/
+    overflow: hidden;
+    padding: 0px 0px 60px;
+    margin-top: -7px;
+    z-index: 10000;
+    /*  compacto */
+}
+
+/*  GRADIENTE INFERIOR PARA DIFUMINAR */
+.sw-crecemos::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 210px;
+    /* desktop */
+    background: linear-gradient(to top,
+            #000 0%,
+            rgba(0, 0, 0, 0.97) 50%,
+            rgba(0, 0, 0, 0.88) 60%,
+            rgba(0, 0, 0, 0.7) 70%,
+            rgba(0, 0, 0, 0.35) 85%,
+            rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* 🔥 ajuste SOLO mobile (menos alto y menos pesado) */
+@media (max-width: 768px) {
+    .sw-crecemos::after {
+        height: 150px;
+        background: linear-gradient(to top,
+                #000 0%,
+                rgba(0, 0, 0, 0.93) 28%,
+                rgba(0, 0, 0, 0.75) 55%,
+                rgba(0, 0, 0, 0.45) 75%,
+                rgba(0, 0, 0, 0) 100%);
+    }
+}
+
+.sw-crecemos__wrap {
+    position: relative;
+    max-width: 1400px;
+    margin: auto;
+    text-align: center;
+}
+
+/* 🔥 BARRA NEÓN */
+.sw-crecemos__glow {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 18px;
+    background: linear-gradient(90deg, transparent, #c8ff00, transparent);
+    filter: blur(10px);
+    animation: swGlowBar 3.5s infinite ease-in-out;
+}
+
+/* TEXTOS */
+.sw-crecemos__text {
+    position: absolute;
+    width: clamp(340px, 50vw, 700px);
+    max-width: 100%;
+    opacity: 0;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s ease-out;
+    will-change: transform, opacity;
+    z-index: 3;
+}
+
+/* entrada desde lados */
+.sw-crecemos__text--left {
+    left: 4%;
+    top: 14%;
+    transform: translateX(-120px);
+}
+
+.sw-crecemos__text--right {
+    right: 4%;
+    top: 34%;
+    transform: translateX(120px);
+    /* Desktop: tamaño original (no reducido) */
+    width: clamp(270px, 40vw, 560px);
+}
+
+/* PRODUCTO */
+.sw-crecemos__product {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+    transition: all 1.2s ease;
+}
+
+@media (max-width: 768px) {
+    .sw-crecemos {
+        padding: 20px 15px 60px;
+    }
+
+    .sw-crecemos__text {
+        position: absolute;
+        width: 60%;
+    }
+
+    .sw-crecemos__text--left {
+        left: 2%;
+        top: 12%;
+    }
+
+    .sw-crecemos__text--right {
+        right: 2%;
+        top: 32%;
+        width: 40%;
+    }
+
+    /* 🔥 ahora sí FULL pantalla real */
+    .sw-crecemos__product {
+        width: 130%;
+        max-width: none;
+        margin-left: -15%;
+        transform: translateY(30px) scale(1);
+    }
+
+
+
+}
+
+
+
+/* ACTIVACIÓN */
+.sw-crecemos.is-visible .sw-crecemos__text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* animación entra DESPUÉS para no romper el slide */
+.sw-crecemos.is-animated .sw-crecemos__text {
+    animation: swTextGlow 4s infinite ease-in-out;
+}
+
+.sw-crecemos.is-visible .sw-crecemos__product {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+
+
+/* ===== ANIMACIONES ===== */
+
+/* textos: glow + ligero crecimiento (15-20%) */
+@keyframes swTextGlow {
+
+    0%,
+    100% {
+        transform: translateX(0) scale(1);
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    }
+
+    50% {
+        transform: translateX(0) scale(1.08);
+        filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.8));
+    }
+}
+
+/* barra: glow más agresivo (30-40%) */
+@keyframes swGlowBar {
+
+    0%,
+    100% {
+        transform: translateX(-50%) scaleX(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateX(-50%) scaleX(1.4);
+        opacity: 1;
+    }
+}
+
+
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1200px) {
+    .sw-crecemos__text {
+        width: 42%;
+    }
+}
+
+@media (max-width: 992px) {
+    .sw-crecemos__text {
+        width: 46%;
+    }
+
+    .sw-crecemos__text--left {
+        left: 3%;
+    }
+
+    .sw-crecemos__text--right {
+        right: 3%;
+    }
+}
+
+@media (max-width: 768px) {
+    .sw-crecemos {
+        padding: 0px 15px 60px;
+    }
+
+    .sw-crecemos__text {
+        position: absolute;
+        width: 60%;
+    }
+
+    .sw-crecemos__text--left {
+        left: 2%;
+        top: 12%;
+    }
+
+    .sw-crecemos__text--right {
+        right: 2%;
+        top: 32%;
+        width: 40%;
+    }
+
+    .sw-crecemos__product {
+        width: 130%;
+        max-width: none;
+        margin-left: -15%;
+        transform: translateY(30px) scale(1);
+    }
+
+
+}

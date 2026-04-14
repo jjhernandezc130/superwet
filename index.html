@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superwet Hero</title>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- LENIS -->
+    <script src="https://unpkg.com/@studio-freight/lenis/bundled/lenis.min.js"></script>
+
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/catalogo.css">
+    <link rel="stylesheet" href="css/carrusel.css">
+    <link rel="stylesheet" href="css/mapa.css">
+    <link rel="stylesheet" href="css/crecemosJuntos.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+
+<body>
+    <!-- hero -->
+    <section class="hero ancho">
+        <div class=" hero__bg hero__bg--top">
+        </div>
+        <div class="hero__bg hero__bg--bottom"></div>
+
+        <div class="hero__header">
+            <img src="img/logo-superwet.webp" class="hero__logo">
+        </div>
+
+        <div class="hero__product">
+            <img src="img/gel-blanco-250ml.webp">
+        </div>
+
+        <a href="#" class="hero__cta">HAZ NEGOCIO</a>
+    </section>
+    <!-- separador -->
+    <section class="ancho">
+        <div class="separador">
+            <img src="img/separador.svg" alt="Separador">
+        </div>
+    </section>
+
+    <!-- promo banner -->
+    <section class="promo-banner" id="promoBanner">
+        <div class="promo-bg-wrap">
+            <img src="img/bola-verde.webp" class="bg-glow" alt="">
+        </div>
+
+        <div class="promo-inner">
+            <div class="promo-content">
+
+                <img src="img/30-mercado.webp" class="promo-title-img">
+
+                <div class="promo-products">
+                    <img src="img/sw-fussion-color.webp" class="product-main">
+                </div>
+
+                <div class="promo-gradient"></div>
+
+                <a href="#" class="promo-btn">CATÁLOGO</a>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- separador -->
+    <section class="ancho">
+        <div class="separador">
+            <img src="img/separador.svg" alt="Separador">
+        </div>
+    </section>
+
+    <!-- carrusel -->
+    <section class="sw-carousel" id="sw-carousel">
+        <div class="sw-carousel__inner">
+            <!-- SLIDES -->
+            <div class="sw-slide active">
+                <picture>
+                    <source media="(max-width:768px)" srcset="img/cera-1-movil.webp">
+                    <img src="img/cera-1.webp" class="sw-bg">
+                </picture>
+                <img src="img/letras-cera.webp" class="sw-text sw-cera">
+                <img src="img/para-cabello.webp" class="sw-text sw-cabello">
+                <img src="img/flexi-wax.webp" class="sw-text sw-flexi">
+            </div>
+            <div class="sw-slide">
+                <picture>
+                    <source media="(max-width:768px)" srcset="img/cera-2-movil.webp">
+                    <img src="img/cera-2.webp" class="sw-bg">
+                </picture>
+                <img src="img/letras-cera.webp" class="sw-text sw-cera">
+                <img src="img/para-cabello.webp" class="sw-text sw-cabello">
+                <img src="img/flexi-wax.webp" class="sw-text sw-flexi">
+            </div>
+            <div class="sw-slide">
+                <picture>
+                    <source media="(max-width:768px)" srcset="img/cera-3-movil.webp">
+                    <img src="img/cera-3.webp" class="sw-bg">
+                </picture>
+                <img src="img/letras-cera.webp" class="sw-text sw-cera">
+                <img src="img/para-cabello.webp" class="sw-text sw-cabello">
+                <img src="img/flexi-wax.webp" class="sw-text sw-flexi">
+            </div>
+            <div class="sw-slide">
+                <picture>
+                    <source media="(max-width:768px)" srcset="img/cera-4-movil.webp">
+                    <img src="img/cera-4.webp" class="sw-bg">
+                </picture>
+                <img src="img/letras-cera.webp" class="sw-text sw-cera">
+                <img src="img/para-cabello.webp" class="sw-text sw-cabello">
+                <img src="img/flexi-wax.webp" class="sw-text sw-flexi">
+            </div>
+            <div class="sw-slide">
+                <picture>
+                    <source media="(max-width:768px)" srcset="img/cera-5-movil.webp">
+                    <img src="img/cera-5.webp" class="sw-bg">
+                </picture>
+                <img src="img/letras-cera.webp" class="sw-text sw-cera">
+                <img src="img/para-cabello.webp" class="sw-text sw-cabello">
+                <img src="img/flexi-wax.webp" class="sw-text sw-flexi">
+            </div>
+            <button class="sw-next">
+                <img src="img/flecha-carrusel.webp">
+            </button>
+        </div>
+    </section>
+
+    <!-- separador -->
+    <section class="ancho">
+        <div class="separador">
+            <img src="img/separador.svg" alt="Separador">
+        </div>
+    </section>
+
+    <!-- mapa -->
+    <section class="sw-encuentra-section" id="sw-encuentra-seccion">
+        <div class="sw-encuentra__bg"></div>
+
+        <div class="sw-encuentra__grid">
+
+            <div class="sw-item-encuentra sw-anim-right sw-observer">
+                <img src="https://superwet.com.mx/img/encuentra-sw.webp"
+                    class="sw-breathe sw-breathe-delay-1 sw-img-responsive">
+            </div>
+
+            <div class="sw-item-mapa sw-anim-fade sw-observer" style="transition-delay: 0.2s;">
+                <img src="https://superwet.com.mx/img/mapa-mx.webp" class="sw-breathe sw-img-responsive">
+            </div>
+
+            <div class="sw-item-video sw-anim-fade sw-observer" style="transition-delay: 0.4s;">
+                <div class="sw-video-container">
+                    <div class="sw-video-button">
+                        <div class="sw-play-icon"></div>
+                    </div>
+                    <video playsinline class="sw-video-element">
+                        <source src="img/SuperWet.mp4" type="video/mp4">
+                    </video>
+                    <!-- overlay eliminado, ahora glow es CSS puro -->
+                </div>
+            </div>
+
+            <div class="sw-item-proximamente sw-anim-left sw-observer" style="transition-delay: 0.6s;">
+                <img src="https://superwet.com.mx/img/txt-proximamente.webp"
+                    class="sw-breathe sw-breathe-delay-1 sw-img-responsive">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- separador -->
+    <section class="ancho separador-crecemos">
+        <div class="separador">
+            <img src="img/separador.svg" alt="Separador">
+        </div>
+    </section>
+    <!-- crecemos juntos -->
+    <section class="sw-crecemos">
+        <div class="sw-crecemos__wrap">
+
+            <div class="sw-crecemos__glow"></div>
+
+            <img src="https://superwet.com.mx/img/texto-crecemos.webp"
+                class="sw-crecemos__text sw-crecemos__text--left">
+
+            <img src="https://superwet.com.mx/img/texto-juntos.webp" class="sw-crecemos__text sw-crecemos__text--right">
+
+            <img src="https://superwet.com.mx/img/img-crecemos-juntos.webp" class="sw-crecemos__product">
+
+            <a href="#" class="sw-crecemos__btn">SER DISTRIBUIDOR</a>
+
+        </div>
+    </section>
+
+    <!-- separador -->
+    <section class="ancho">
+        <div class="separador">
+            <img src="img/separador.svg" alt="Separador">
+        </div>
+    </section>
+    <!-- footer -->
+    <section class="footer-social" id="footer">
+        <div class="footer-content">
+            <!-- ICONOS ARRIBA -->
+            <div class="footer-icons">
+                <a href="#" class="icon-item">
+                    <img src="https://superwet.com.mx/img/INSTAGRAM.webp" alt="Instagram">
+                </a>
+                <a href="#" class="icon-item">
+                    <img src="https://superwet.com.mx/img/YOUTUBE.webp" alt="Youtube">
+                </a>
+                <a href="#" class="icon-item">
+                    <img src="https://superwet.com.mx/img/TIKTOK.webp" alt="Tiktok">
+                </a>
+            </div>
+
+            <!-- TEXTO ABAJO -->
+            <img src="https://superwet.com.mx/img/SIGUENOS-REDES.webp" alt="Siguenos en redes sociales"
+                class="footer-title">
+
+        </div>
+
+        <div class="footer-gradient"></div>
+    </section>
+
+
+    <script src="js/hero.js"></script>
+    <script src="js/catalogo.js"></script>
+    <script src="js/carrusel.js"></script>
+    <script src="js/mapa.js"></script>
+    <script src="js/crecemosJuntos.js"></script>
+    <script src="js/footer.js"></script>
+</body>
+
+</html>

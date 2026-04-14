@@ -1,0 +1,142 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: #000;
+}
+
+.footer-social {
+    position: relative;
+    background: #000;
+    overflow: hidden;
+    padding: 100px 20px 120px;
+    text-align: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+
+}
+
+.footer-title {
+    width: 90%;
+    max-width: 900px;
+    margin-top: 60px;
+    opacity: 0;
+    transform: translateY(80px);
+    /* Añadiendo el glow blanco/verde detrás de las letras */
+    /*filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 35px rgba(195, 221, 46, 0.4));*/
+}
+
+.footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.icon-item {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(80px);
+}
+
+.icon-item img {
+    width: 120px;
+    /* Glow más intenso y expansivo para los íconos */
+    /* filter: drop-shadow(0 0 2px rgba(195, 221, 46, 1)) drop-shadow(0 0 5px rgba(195, 221, 46, 0.5));
+    transition: transform 0.3s ease;*/
+}
+
+.icon-item:hover img {
+    transform: scale(1.1);
+}
+
+.footer-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    opacity: 0;
+    transform: translateY(100%);
+    background-image: linear-gradient(0deg, rgba(194, 221, 46, 1) 0%, rgba(194, 221, 46, 0.4) 40%, rgba(0, 0, 0, 0) 100%);
+    /*filter: none;*/
+}
+
+/* ANIMACIONES */
+/* 1. Primero la frase "Síguenos en redes" */
+.show-footer .footer-title {
+    animation: slideUp 0.8s ease forwards;
+    animation-delay: 0.2s;
+}
+
+/* 2. Después los íconos de redes sociales */
+.show-footer .icon-item:nth-child(1) {
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: 0.8s;
+}
+
+.show-footer .icon-item:nth-child(2) {
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: 1.1s;
+}
+
+.show-footer .icon-item:nth-child(3) {
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: 1.4s;
+}
+
+/* 3. Al final el degradado */
+.show-footer .footer-gradient {
+    animation: gradientUp 1s ease forwards;
+    animation-delay: 1.8s;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(80px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gradientUp {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+
+    .footer-social {
+        padding: 0px 20px 50px;
+    }
+
+    .footer-title {
+        margin-top: 40px;
+    }
+
+    .footer-icons {
+        gap: 25px;
+    }
+
+    .icon-item img {
+        width: 100px;
+    }
+
+    .footer-gradient {
+        height: 80px;
+    }
+}

@@ -1,0 +1,244 @@
+body {
+    margin: 0;
+    background: #000;
+    font-family: sans-serif
+}
+
+.sw-carousel {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #000
+}
+
+.sw-carousel__inner {
+    width: 100%;
+    max-width: 1400px;
+    position: relative;
+    overflow: hidden
+}
+
+/* Degradado inferior para fundir imagen con fondo */
+.sw-carousel__inner::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 180px;
+    pointer-events: none;
+    background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0.85) 40%, rgba(0, 0, 0, 0) 100%);
+    z-index: 5;
+}
+
+.sw-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .6s ease
+}
+
+.sw-slide.active {
+    opacity: 1;
+    position: relative
+}
+
+.sw-bg {
+    width: 100%;
+    display: block
+}
+
+.sw-text {
+    position: absolute;
+    pointer-events: none;
+    will-change: transform, opacity
+}
+
+/* ================= DESKTOP (INTACTO) ================= */
+.sw-cera {
+    top: 6%;
+    right: calc(12% - 125px);
+    width: 525px;
+    opacity: 0;
+    transform: translateX(-120px);
+    z-index: 3
+}
+
+.sw-cabello {
+    top: 42%;
+    right: calc(12% - 130px);
+    width: 512px;
+    opacity: 0;
+    transform: translateX(120px);
+    z-index: 3
+}
+
+.sw-flexi {
+    display: none
+}
+
+.sw-slide.active .sw-cera {
+    animation: ceraIn 1.4s ease forwards, breatheCarrusel 2.5s ease-in-out infinite 1.4s
+}
+
+.sw-slide.active .sw-cabello {
+    animation: cabelloIn 1.4s ease forwards, breatheCarrusel 2.5s ease-in-out infinite 1.4s
+}
+
+@keyframes ceraIn {
+    from {
+        opacity: 0;
+        transform: translateX(-120px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+
+@keyframes cabelloIn {
+    from {
+        opacity: 0;
+        transform: translateX(120px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+
+@keyframes breatheCarrusel {
+
+    0%,
+    100% {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scale(1.04)
+    }
+}
+
+.sw-next {
+    position: absolute;
+    bottom: 130px;
+    right: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10
+}
+
+.sw-next img {
+    width: 180px;
+    filter: drop-shadow(0 0 15px #baff00)
+}
+
+/* ================= MOBILE (AISLADO) ================= */
+@media (max-width:768px) {
+
+    @keyframes ceraIn {
+        from {
+            opacity: 0;
+            transform: translateX(calc(-50% - 120px))
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(-50%)
+        }
+    }
+
+    @keyframes cabelloIn {
+        from {
+            opacity: 0;
+            transform: translateX(calc(-50% + 120px))
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(-50%)
+        }
+    }
+
+    /* altura fija SOLO en mobile */
+    .sw-carousel__inner {
+        height: 800px;
+        overflow: hidden;
+    }
+
+    .sw-slide {
+        position: absolute;
+        inset: 0;
+    }
+
+    /* reset limpio */
+    .sw-text {
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%);
+    }
+
+    /* bajar producto */
+    .sw-bg {
+        transform: translateY(240px);
+    }
+
+    /* capas y posiciones */
+    .sw-flexi {
+        display: block;
+        z-index: 1;
+        width: 360px;
+        top: 21%;
+        opacity: 0
+    }
+
+    .sw-cera {
+        width: 260px;
+        top: 5%;
+        z-index: 3;
+        opacity: 0;
+        transform: translateX(calc(-50% - 80px))
+    }
+
+    .sw-cabello {
+        width: 260px;
+        top: 46%;
+        z-index: 3;
+        opacity: 0;
+        transform: translateX(calc(-50% + 80px))
+    }
+
+    .sw-slide.active .sw-flexi {
+        animation: fadeIn 1s ease forwards 0.4s
+    }
+
+    .sw-slide.active .sw-cera {
+        animation: ceraIn 1.2s ease forwards
+    }
+
+    .sw-slide.active .sw-cabello {
+        animation: cabelloIn 1.2s ease forwards
+    }
+
+    .sw-next {
+        bottom: 20px;
+        right: 20px
+    }
+
+    .sw-next img {
+        width: 70px
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
