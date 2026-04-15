@@ -14,7 +14,8 @@
         body {
             margin: 0;
             /* background: #000;*/
-            font-family: sans-serif
+            font-family: sans-serif;
+            background: #111;
         }
 
         :root {
@@ -27,6 +28,21 @@
         *::before,
         *::after {
             box-sizing: border-box;
+        }
+
+        .sw-contacto-container {
+            background-color: #0B0B0B;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            color: white;
+            text-align: center;
         }
 
         .sw-form-container {
@@ -137,7 +153,27 @@
             display: flex;
             justify-content: center;
         }
+
+        .sw-contacto-text {
+            max-width: 500px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            color: white;
+            text-align: center;
+            line-height: 2;
+        }
     </style>
+
+    <div class="sw-contacto-container">
+        <h1>Únete a la experiencia Superwet.</h1>
+        <p class="sw-contacto-text">¿Interesado en nuestra línea de ceras y shampoos? Déjanos tus datos para recibir
+            asesoría personalizada sobre
+            compras, envíos o cómo convertirte en distribuidor oficial.
+        </p>
+    </div>
 
     <div class="sw-form-container">
         <form id="miFormulario" class="sw-form">
@@ -162,7 +198,7 @@
                 <label>Mensaje</label>
                 <textarea name="mensaje" rows="3" required></textarea>
             </div>
-            <div class="g-recaptcha" data-sitekey="6LdlEx4sAAAAAM9Em-YeK166SFoQHcRfcOAAjsxs"></div>
+            <div class="g-recaptcha" data-sitekey="6LdlEx4sAAAAAM9Em-YeK166SFoQHcRfcOAAjsxs" data-theme="dark"></div>
 
             <button class="sw-btn" type="submit">Enviar</button>
 
