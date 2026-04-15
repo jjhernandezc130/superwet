@@ -6,6 +6,8 @@
     /* reducimos altura del componente */
     background: #000;
     font-family: Arial, sans-serif;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .sw-encuentra-section * {
